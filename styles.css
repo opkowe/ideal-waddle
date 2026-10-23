@@ -1662,6 +1662,15 @@ dialog::backdrop {
   z-index: 1;
   transition: opacity 560ms ease-in-out, visibility 0s;
 }
+/* A brief desktop dissolve has no spatial movement. Keep all other reduced-motion rules. */
+@media (min-width: 921px) and (prefers-reduced-motion: reduce) {
+  .hero-carousel .hero-slide {
+    transition: opacity 320ms ease-in-out, visibility 0s linear 320ms !important;
+  }
+  .hero-carousel .hero-slide.is-active {
+    transition: opacity 320ms ease-in-out, visibility 0s !important;
+  }
+}
 .hero-ferrules .hero-inner, .hero-pushpull .hero-inner {
   justify-content: flex-start;
   text-align: left;
