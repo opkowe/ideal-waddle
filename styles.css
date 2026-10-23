@@ -705,7 +705,7 @@ dialog::backdrop {
   background:#001a2cc4;
   backdrop-filter:blur(5px);
 }
-.dialog-close {
+.dialog-close.icon-button {
   position:absolute;
   z-index:2;
   right:17px;
@@ -714,6 +714,15 @@ dialog::backdrop {
   border-radius:50%;
   width:38px;
   height:38px;
+  padding:0;
+}
+.dialog-close svg {
+  display:block;
+  width:18px;
+  height:18px;
+  stroke-width:2;
+  stroke-linecap:round;
+  pointer-events:none;
 }
 .dialog-content {
   display:grid;
@@ -1369,7 +1378,7 @@ dialog::backdrop {
   .dialog-copy h2 {
     margin-bottom:18px;
   }
-  .dialog-close {
+  .dialog-close.icon-button {
     top:12px;
     right:12px;
   }
