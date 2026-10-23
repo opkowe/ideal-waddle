@@ -1382,6 +1382,10 @@ dialog::backdrop {
     top:12px;
     right:12px;
   }
+  /* Keep touch-opened mobile dialogs free of the automatic focus ring. */
+  .pointer-navigation .dialog-close.icon-button:focus {
+    outline:none;
+  }
   .solution-detail {
     padding:52px 28px 32px;
   }

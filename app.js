@@ -24,6 +24,13 @@ function art(p){return '<div class="product-art '+(p.class||"")+'">'+p.images.ma
 function card(p){return '<article class="product-card" data-category="'+p.category+'">'+art(p)+'<div class="product-info"><p class="product-family">'+esc(p.family)+'</p><h3>'+esc(p.name)+'</h3><p>'+esc(p.description)+'</p><button class="card-link" data-product="'+p.id+'" aria-label="View '+esc(p.name)+' details">Explore product</button></div></article>'}
 function rangeCard(p){return '<button class="range-card" data-product="'+p.id+'" data-category="'+p.category+'" aria-label="View '+esc(p.name)+' details">'+art(p)+'<span><h3>'+esc(p.name)+'</h3><p>'+esc(p.description)+'</p><span class="range-arrow" aria-hidden="true">↗</span></span></button>'}
 function renderProducts(category="all"){const visible=products.filter(p=>category==="all"||p.category===category);const featured=visible.filter(p=>p.featured);const others=visible.filter(p=>!p.featured);byId("featured-products").innerHTML=featured.map(card).join("");byId("range-products").innerHTML=others.map(rangeCard).join("");document.querySelector(".range-heading").hidden=others.length===0;document.querySelector(".catalog-count").textContent=visible.length+" product families";byId("featured-products").hidden=!featured.length;document.querySelectorAll("[data-filter]").forEach(b=>{const selected=b.dataset.filter===category;b.classList.toggle("active",selected);b.setAttribute("aria-pressed",selected)})}
+// Dialog autofocus may show a keyboard ring after a tap. Preserve it for keyboard navigation only.
+document.addEventListener('pointerdown',()=>document.documentElement.classList.add('pointer-navigation'),true);
+document.addEventListener('keydown',event=>{
+  if(['Tab','Enter',' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key)){
+    document.documentElement.classList.remove('pointer-navigation');
+  }
+},true);
 let previousFocus=null;
 function showDialog(d){if(!document.activeElement?.closest("dialog"))previousFocus=document.activeElement;document.querySelectorAll("dialog[open]").forEach(el=>el.close());d.showModal();document.body.classList.add("modal-open")}
 function closeDialog(d){d.close();document.body.classList.remove("modal-open");previousFocus?.focus()}
